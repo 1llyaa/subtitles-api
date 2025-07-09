@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  whisper-api:
+    image: whisper-api:latest
+    container_name: whisper-api
+    networks:
+      - n8n-network
+    volumes:
+      - whisper_api_data:/data
+    restart: unless-stopped
+
+volumes:
+  whisper_api_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/whisper_api_data
+
+networks:
+  n8n-network:
+    external: true
